@@ -1,0 +1,4 @@
+PyNiteFEA
+scipy
+plotly
+IPython
