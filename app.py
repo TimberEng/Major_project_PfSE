@@ -92,7 +92,7 @@ h_check = analysis.eng_check("Horizontal displacement", max_horizontal, h_cri)
 v_check = analysis.eng_check("Vertical displacement", max_vertical, v_cri)
 
     
-tab2, tab3, tab4, tab5 = st.tabs(['Shear Desing', 'Bending Moment Desing','Vertical Displacment Desing','Horizontal Displacment Desing'])
+tab2, tab3, tab4, tab5 = st.tabs(['Shear Design', 'Bending Moment Design','Vertical Displacment Design','Horizontal Displacment Design'])
 with tab2: #SFD
     st.write(f"Max shear force based on seleted UB Section: {round(max_shear, 2)} kN")
     st.write(f"Shear desgin criterion: {shear_cri} kN")
