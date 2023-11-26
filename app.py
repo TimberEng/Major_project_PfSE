@@ -98,22 +98,26 @@ with tab2: #SFD
     st.write(f"Shear desgin criterion: {shear_cri} kN")
     st.write(f"{shear_check}")
     Shear_fig = go.Figure()
-    Shear_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[0][0][0],
-                                   y = appmo.get_list(frame_model)[0][0][1] /1000,
-                                   name="Member 1",
-                                   line=dict(color = colors[0], width = 4)))
-    Shear_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[0][1][0],
-                                   y = appmo.get_list(frame_model)[0][1][1] /1000,
-                                   name="Member 2",
-                                   line=dict(color = colors[1], width = 4)))
-    Shear_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[0][2][0],
-                                   y = appmo.get_list(frame_model)[0][2][1] /1000,
-                                   name="Member 3",
-                                   line=dict(color = colors[2], width = 4)))
-    Shear_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[0][3][0],
-                                   y = appmo.get_list(frame_model)[0][3][1] /1000,
-                                   name="Member 4",
-                                   line=dict(color = colors[3], width = 4)))
+    appmo.plot(Shear_fig, 
+               appmo.get_list(frame_model)[0][0][0], 
+               appmo.get_list(frame_model)[0][0][1] /1000, 
+               "Member 1", 
+               colors[0])
+    appmo.plot(Shear_fig,
+               appmo.get_list(frame_model)[0][1][0],
+               appmo.get_list(frame_model)[0][1][1] /1000,
+               "Member 2",
+               colors[1])
+    appmo.plot(Shear_fig,
+               appmo.get_list(frame_model)[0][2][0],
+               appmo.get_list(frame_model)[0][2][1] /1000,
+               "Member 3",
+               colors[2])   
+    appmo.plot(Shear_fig,
+               appmo.get_list(frame_model)[0][3][0],
+               appmo.get_list(frame_model)[0][3][1] /1000,
+               "Member 3",
+               colors[3])   
     Shear_fig.layout.xaxis.title = "Member length (mm)"
     Shear_fig.layout.yaxis.title = "Member shear force (kN)"
     Shear_fig
@@ -123,22 +127,26 @@ with tab3: #BMD
     st.write(f"Bending moment criterion: {round(moment_cri,2)} kNm")
     st.write(f"{moment_check}")
     Moment_fig = go.Figure()
-    Moment_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[1][0][0],
-                                    y = appmo.get_list(frame_model)[1][0][1]/10**6,
-                                    name="Member 1",
-                                   line=dict(color = colors[0], width = 4)))
-    Moment_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[1][1][0],
-                                    y = appmo.get_list(frame_model)[1][1][1]/10**6,
-                                    name="Member 2",
-                                   line=dict(color = colors[1], width = 4)))
-    Moment_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[1][2][0],
-                                    y = appmo.get_list(frame_model)[1][2][1]/10**6,
-                                    name="Member 3",
-                                   line=dict(color = colors[2], width = 4)))
-    Moment_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[1][3][0],
-                                    y = appmo.get_list(frame_model)[1][3][1]/10**6,
-                                    name="Member 4",
-                                   line=dict(color = colors[3], width = 4)))
+    appmo.plot(Moment_fig, 
+               appmo.get_list(frame_model)[1][0][0], 
+               appmo.get_list(frame_model)[1][0][1] /10**6, 
+               "Member 1", 
+               colors[0])
+    appmo.plot(Moment_fig, 
+               appmo.get_list(frame_model)[1][1][0], 
+               appmo.get_list(frame_model)[1][1][1] /10**6, 
+               "Member 2", 
+               colors[1])
+    appmo.plot(Moment_fig, 
+               appmo.get_list(frame_model)[1][2][0], 
+               appmo.get_list(frame_model)[1][2][1] /10**6, 
+               "Member 3", 
+               colors[2])
+    appmo.plot(Moment_fig, 
+               appmo.get_list(frame_model)[1][3][0], 
+               appmo.get_list(frame_model)[1][3][1] /10**6, 
+               "Member 4", 
+               colors[3])
     Moment_fig.layout.xaxis.title = "Member length (mm)"
     Moment_fig.layout.yaxis.title = "Member bending moment(kNm)"
     Moment_fig

@@ -5,7 +5,7 @@ from math import radians
 from Structural_Analysis import analysis
 from eng_module import utils
 import pandas as pd
-
+import plotly.graph_objects as go
 #############################
 
 def build_frame(H, L, w, ang_d, Iy, Iz, It, A):
@@ -124,6 +124,23 @@ def get_nodes(frame_model) -> list:
         X.append(item.X)
         Y.append(item.Y)
     return X, Y
+
+def plot (fig, x_data, y_data, member_name, fill_color):
+    fig.add_trace(go.Scatter(x = x_data, y = y_data,
+                               name= member_name,
+                               fill='tozeroy',
+                               fillcolor= fill_color,
+                               mode= 'lines',
+                               line=dict(color = 'black', width = 2)))
+    
+    fig.add_trace(go.Scatter(x =x_data, y = [0] * len(x_data),
+                               line=dict(color = 'black'),
+                               showlegend = False))
+
+    return fig
+
+
+
 
 section_data = utils.read_csv_file("section.csv")   
 
