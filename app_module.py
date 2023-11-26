@@ -129,7 +129,8 @@ section_data = utils.read_csv_file("section.csv")
 
 analysis.csv_record_to_Isction(section_data[1])
 
-section_df = pd.read_csv("D:\\Chunhao_PfSE\\Projects\\Major_project_PfSE\\arcelor_mittal_scaled.csv")
+#section_df = pd.read_csv("D:\\Chunhao_PfSE\\Projects\\Major_project_PfSE\\arcelor_mittal_scaled.csv")
+section_df = pd.read_csv("arcelor_mittal_scaled.csv")
 section_df.set_index("Section")
 col = section_df["Section"]
 section_df = section_df.set_index("Section")
