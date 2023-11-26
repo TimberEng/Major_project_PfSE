@@ -4,10 +4,11 @@ from math import tan
 from math import radians
 from Structural_Analysis import analysis
 from eng_module import utils
+import pandas as pd
 
 #############################
 
-def build_frame(H, L, w, ang_d):
+def build_frame(H, L, w, ang_d, Iy, Iz, It, A):
     """
     H, l, w, ang_d
     """
@@ -29,17 +30,13 @@ def build_frame(H, L, w, ang_d):
     member_length = sqrt(m)
 
     #Define material
-    I_1 = 9050000.0 # mm*4
-    I_2 = 672000.0 # mm*4
-    J = 60500.0 # mm*4
-    A = 2300 # mm*2
     frame_model.add_material(name='Steel', E=200e3, G=80e3, nu=0.25, rho=7.85e-6)
     
     #Add frame members
-    frame_model.add_member('M1', 'node1', 'node2', 'Steel', I_2, I_1, J, A)
-    frame_model.add_member('M2', 'node2', 'node3', 'Steel', I_2, I_1, J, A)
-    frame_model.add_member('M3', 'node3', 'node4', 'Steel', I_2, I_1, J, A)
-    frame_model.add_member('M4', 'node4', 'node5', 'Steel', I_2, I_1, J, A)
+    frame_model.add_member('M1', 'node1', 'node2', 'Steel', Iz, Iy, It, A)
+    frame_model.add_member('M2', 'node2', 'node3', 'Steel', Iz, Iy, It, A)
+    frame_model.add_member('M3', 'node3', 'node4', 'Steel', Iz, Iy, It, A)
+    frame_model.add_member('M4', 'node4', 'node5', 'Steel', Iz, Iy, It, A)
     
     #Add load
     frame_model.add_load_combo('L',{"D":1})
@@ -69,7 +66,7 @@ def find_max_moment(frame_model):
     moment_min_4=abs(frame_model.Members['M4'].min_moment('Mz', combo_name = 'L')/10**6)
     return max (moment_max_1, moment_max_2, moment_max_3, moment_max_4, moment_min_1, moment_min_2, moment_min_3, moment_min_4)
 
-def  find_max_shear(frame_model):
+def find_max_shear(frame_model):
     #max shear
     shear_max_1=abs(frame_model.Members['M1'].max_shear('Fy', combo_name = 'L')/10**3)
     shear_max_2=abs(frame_model.Members['M2'].max_shear('Fy', combo_name = 'L')/10**3)
@@ -131,3 +128,10 @@ def get_nodes(frame_model) -> list:
 section_data = utils.read_csv_file("section.csv")   
 
 analysis.csv_record_to_Isction(section_data[1])
+
+section_df = pd.read_csv("D:\\Chunhao_PfSE\\Projects\\Major_project_PfSE\\arcelor_mittal_scaled.csv")
+section_df.set_index("Section")
+col = section_df["Section"]
+section_df = section_df.set_index("Section")
+
+
