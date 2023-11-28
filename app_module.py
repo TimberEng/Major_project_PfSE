@@ -125,17 +125,18 @@ def get_nodes(frame_model) -> list:
         Y.append(item.Y)
     return X, Y
 
-def plot (fig, x_data, y_data, member_name, fill_color):
+def plot (fig, x_data, y_data, member_name, fill_color, line_color):
     fig.add_trace(go.Scatter(x = x_data, y = y_data,
                                name= member_name,
                                fill='tozeroy',
                                fillcolor= fill_color,
                                mode= 'lines',
-                               line=dict(color = 'black', width = 2)))
+                               line=dict(color = line_color, width = 2)))
     
-    fig.add_trace(go.Scatter(x =x_data, y = [0] * len(x_data),
-                               line=dict(color = 'black'),
-                               showlegend = False))
+    fig.add_trace(go.Scatter(x = x_data, 
+                             y = [0] * len(x_data),
+                             line=dict(color = 'black'),
+                             showlegend = False))
 
     return fig
 

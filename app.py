@@ -43,7 +43,9 @@ edges = [
     [3, 4]
 ]
 
-colors = ['rgb(255,0,0)', 'rgb(0,255,0)', 'rgb(0,0,255)', 'rgb(0,0,0)']
+colors_line = ['rgb(255,0,0)', 'rgb(0,255,0)', 'rgb(0,0,255)', 'rgb(255,180,23)']
+colors = ['rgba(255,0,0,0.5)', 'rgba(0,255,0,0.5)', 'rgba(0,0,255,0.5)', 'rgba(255,180,23,0.5)']
+members = ['Left column', 'Left roof', 'Right roof', 'Right column']
 
 Frame_fig = go.Figure()
 for index, (i_node, j_node) in enumerate(edges):
@@ -55,13 +57,14 @@ for index, (i_node, j_node) in enumerate(edges):
         x = [x_coord_i, x_coord_j],
         y = [y_coord_i, y_coord_j],
         line = {
-            'color': colors[index],
+            'color': colors_line[index],
             'width': 5
         },
         marker={
             'size': 10
         },
-        showlegend = False
+        name = members[index],
+        showlegend = True
     )
     Frame_fig.add_trace(trace)
 
@@ -101,23 +104,27 @@ with tab2: #SFD
     appmo.plot(Shear_fig, 
                appmo.get_list(frame_model)[0][0][0], 
                appmo.get_list(frame_model)[0][0][1] /1000, 
-               "Member 1", 
-               colors[0])
+               members[0], 
+               colors[0],
+               colors_line[0])
     appmo.plot(Shear_fig,
                appmo.get_list(frame_model)[0][1][0],
                appmo.get_list(frame_model)[0][1][1] /1000,
-               "Member 2",
-               colors[1])
+               members[1],
+               colors[1],
+               colors_line[1])
     appmo.plot(Shear_fig,
                appmo.get_list(frame_model)[0][2][0],
                appmo.get_list(frame_model)[0][2][1] /1000,
-               "Member 3",
-               colors[2])   
+               members[2],
+               colors[2],
+               colors_line[2])   
     appmo.plot(Shear_fig,
                appmo.get_list(frame_model)[0][3][0],
                appmo.get_list(frame_model)[0][3][1] /1000,
-               "Member 3",
-               colors[3])   
+               members[3],
+               colors[3],
+               colors_line[3])   
     Shear_fig.layout.xaxis.title = "Member length (mm)"
     Shear_fig.layout.yaxis.title = "Member shear force (kN)"
     Shear_fig
@@ -130,23 +137,27 @@ with tab3: #BMD
     appmo.plot(Moment_fig, 
                appmo.get_list(frame_model)[1][0][0], 
                appmo.get_list(frame_model)[1][0][1] /10**6, 
-               "Member 1", 
-               colors[0])
+               members[0], 
+               colors[0],
+               colors_line[0])
     appmo.plot(Moment_fig, 
                appmo.get_list(frame_model)[1][1][0], 
                appmo.get_list(frame_model)[1][1][1] /10**6, 
-               "Member 2", 
-               colors[1])
+               members[1], 
+               colors[1],
+               colors_line[1])
     appmo.plot(Moment_fig, 
                appmo.get_list(frame_model)[1][2][0], 
                appmo.get_list(frame_model)[1][2][1] /10**6, 
-               "Member 3", 
-               colors[2])
+               members[2], 
+               colors[2],
+               colors_line[2])
     appmo.plot(Moment_fig, 
                appmo.get_list(frame_model)[1][3][0], 
                appmo.get_list(frame_model)[1][3][1] /10**6, 
-               "Member 4", 
-               colors[3])
+               members[3], 
+               colors[3],
+               colors_line[3])
     Moment_fig.layout.xaxis.title = "Member length (mm)"
     Moment_fig.layout.yaxis.title = "Member bending moment(kNm)"
     Moment_fig
@@ -158,20 +169,20 @@ with tab4: #V disp
     Vertical_dis_fig = go.Figure()
     Vertical_dis_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[2][0][0],
                                           y = appmo.get_list(frame_model)[2][0][1],
-                                          name="Memnber 1",
-                                   line=dict(color = colors[0], width = 4)))
+                                          name=members[0],
+                                   line=dict(color = colors_line[0], width = 4)))
     Vertical_dis_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[2][1][0],
                                           y = appmo.get_list(frame_model)[2][1][1],
-                                          name="Memnber 2",
-                                   line=dict(color = colors[1], width = 4)))
+                                          name=members[1],
+                                   line=dict(color = colors_line[1], width = 4)))
     Vertical_dis_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[2][2][0],
                                           y = appmo.get_list(frame_model)[2][2][1],
-                                          name="Memnber 3",
-                                   line=dict(color = colors[2], width = 4)))
+                                          name=members[2],
+                                   line=dict(color = colors_line[2], width = 4)))
     Vertical_dis_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[2][3][0],
                                           y = appmo.get_list(frame_model)[2][3][1],
-                                          name="Memnber 4",
-                                   line=dict(color = colors[3], width = 4)))
+                                          name=members[3],
+                                   line=dict(color = colors_line[3], width = 4)))
     Vertical_dis_fig.layout.xaxis.title = "Member length (mm)"
     Vertical_dis_fig.layout.yaxis.title = "Member vertical displacement (mm)"
     Vertical_dis_fig
@@ -183,20 +194,20 @@ with tab5: #H disp
     Horizontal_dis_fig = go.Figure()
     Horizontal_dis_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[3][0][0],
                                             y = appmo.get_list(frame_model)[3][0][1],
-                                            name="Member 1",
-                                   line=dict(color = colors[0], width = 4)))
+                                            name=members[0],
+                                   line=dict(color = colors_line[0], width = 4)))
     Horizontal_dis_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[3][1][0],
                                             y = appmo.get_list(frame_model)[3][1][1],
-                                            name="Member 2",
-                                   line=dict(color = colors[1], width = 4)))
+                                            name=members[1],
+                                   line=dict(color = colors_line[1], width = 4)))
     Horizontal_dis_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[3][2][0],
                                             y = appmo.get_list(frame_model)[3][2][1],
-                                            name="Member 3",
-                                   line=dict(color = colors[2], width = 4)))
+                                            name=members[2],
+                                   line=dict(color = colors_line[2], width = 4)))
     Horizontal_dis_fig.add_trace(go.Scatter(x = appmo.get_list(frame_model)[3][3][0],
                                             y = appmo.get_list(frame_model)[3][3][1],
-                                            name="Member 4",
-                                   line=dict(color = colors[3], width = 4)))
+                                            name=members[3],
+                                   line=dict(color = colors_line[3], width = 4)))
     Horizontal_dis_fig.layout.xaxis.title = "Member length (mm)"
     Horizontal_dis_fig.layout.yaxis.title = "Member horizontal displacement (mm)"
     Horizontal_dis_fig
